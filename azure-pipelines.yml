@@ -9,16 +9,13 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '2.x'
-      addToPath: true
-      architecture: 'x64'
-  - task: ArtifactoryPython@1
-    inputs:
-      artifactoryService: 'ecosys'
-      command: 'install'
-      targetResolveRepo: 'pypi'
-      collectBuildInfo: true
-      buildName: '$(Build.DefinitionName)'
-      buildNumber: '$(Build.BuildNumber)'
+
+- task: ArtifactoryPip@1
+  inputs:
+    artifactoryService: 'ecosys'
+    command: 'install'
+    targetResolveRepo: 'pypi'
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    workingDirectory: 'python-example'
